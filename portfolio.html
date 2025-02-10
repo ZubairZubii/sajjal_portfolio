@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sajjal Ijaz - Video Editor & Content Creator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #8b5cf6;
+            --accent-color: #ec4899;
+            --text-color: #ffffff;
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            --accent-gradient: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: radial-gradient(circle at center, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 30%),
+                radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 30%);
+            filter: blur(40px);
+            animation: gradientMove 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes gradientMove {
+            0% { transform: translate(-5%, -5%) scale(1); }
+            50% { transform: translate(5%, 5%) scale(1.1); }
+            100% { transform: translate(-5%, -5%) scale(1); }
+        }
+
+        .header-content {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titlePulse 3s ease-in-out infinite;
+        }
+
+        @keyframes titlePulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .subtitle {
+            font-size: 1.6rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .subtitle span {
+            position: relative;
+        }
+
+        .subtitle span::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            right: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .subtitle span:last-child::after {
+            display: none;
+        }
+
+        section {
+            padding: 6rem 0;
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .about, .tools, .ai-tools, .portfolio, .instagram-profile {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .about:hover, .tools:hover, .ai-tools:hover, .portfolio:hover, .instagram-profile:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 48px rgba(99, 102, 241, 0.2);
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        .tool-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .tool {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.2rem 2.5rem;
+            border-radius: 100px;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .tool::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .tool:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.2);
+        }
+
+        .tool:hover::before {
+            opacity: 1;
+        }
+
+        .tool span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .video {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .video::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gradient);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+        }
+
+        .video:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 12px 48px rgba(99, 102, 241, 0.3);
+        }
+
+        .video:hover::before {
+            opacity: 0.3;
+        }
+
+        .video video {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .video:hover video {
+            transform: scale(1.05);
+        }
+
+        .instagram-profiles {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .profile-image {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-image::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 50%;
+            background: var(--gradient);
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: borderRotate 8s linear infinite;
+        }
+
+        @keyframes borderRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--card-bg);
+        }
+
+        .profile-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+        }
+
+        .stat-number {
+            font-size: 1.4rem;
+            font-weight: 600;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.3rem;
+        }
+
+        .profile-link {
+            display: inline-block;
+            background: var(--gradient);
+            padding: 1rem 2.5rem;
+            border-radius: 100px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-top: 1.5rem;
+        }
+
+        .profile-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 3rem; }
+            h2 { font-size: 2rem; }
+            .subtitle { font-size: 1.2rem; }
+            .video video { height: 300px; }
+            .about, .tools, .ai-tools, .portfolio, .instagram-profile {
+                padding: 2rem;
+            }
+            .tool { padding: 1rem 2rem; }
+        }
+    </style
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Sajjal Ijaz</h1>
+            <p class="subtitle">Video Editor | Content Creator | AI Video Enthusiast</p>
+        </div>
+    </header>
+    
+    <main class="container">
+        <section class="about">
+            <h2>About Me</h2>
+            <p>I'm Sajjal Ijaz, a passionate video editor with 2 years of experience working with various tools and managing content for fan pages. I specialize in using modern AI tools like <strong>app.hygen</strong> and <strong>veed.io</strong> to enhance video editing efficiency. My work has garnered thousands of likes and shares across platforms.</p>
+        </section>
+        
+        <section class="tools">
+            <h2>Editing Tools</h2>
+            <div class="tool-list">
+                <span class="tool">CapCut</span>
+                <span class="tool">InShot</span>
+                <span class="tool">Premiere Pro</span>
+                <span class="tool">Alight Motion</span>
+                <span class="tool">Canva</span>
+            </div>
+        </section>
+        
+        <section class="ai-tools">
+            <h2>AI Video Editing Tools</h2>
+            <div class="tool-list">
+                <span class="tool">app.hygen</span>
+                <span class="tool">veed.io</span>
+            </div>
+        </section>
+        
+        <section class="portfolio">
+            <h2>My Work</h2>
+            <div class="gallery">
+                <div class="video">
+                    <video controls width="100%">
+                        <source src="./1.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="video">
+                    <video controls width="100%">
+                        <source src="./2.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="video">
+                    <video controls width="100%">
+                        <source src="./3.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="video">
+                    <video controls width="100%">
+                        <source src="./4.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </section>
+        
+        <section class="instagram-showcase">
+            <h2>Instagram Presence</h2>
+            <div class="instagram-profiles">
+                <div class="instagram-profile">
+                    <div class="profile-image">
+                        <img src="./news.png" alt="Newsly Pakistan Logo" />
+                    </div>
+                    <h3>NewslypPakistan</h3>
+                    <div class="profile-stats">
+                        <div class="stat">
+                            <div class="stat-number">35</div>
+                            <div class="stat-label">posts</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">59.5K</div>
+                            <div class="stat-label">followers</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">157</div>
+                            <div class="stat-label">following</div>
+                        </div>
+                    </div>
+                    <p class="profile-bio">Digital creator<br>A next-gen digital #startup transforming your vision into standout content!</p>
+                    <a href="https://www.instagram.com/newslypakistan" target="_blank" class="profile-link">View Profile</a>
+                </div>
+
+                <div class="instagram-profile">
+                    <div class="profile-image">
+                        <img src="./naseem.png" alt="Naseem Stann Profile" />
+                    </div>
+                    <h3>naseem.stann</h3>
+                    <div class="profile-stats">
+                        <div class="stat">
+                            <div class="stat-number">215</div>
+                            <div class="stat-label">posts</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">621</div>
+                            <div class="stat-label">followers</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">99</div>
+                            <div class="stat-label">following</div>
+                        </div>
+                    </div>
+                    <p class="profile-bio">Editor<br>Supporting the best person alive <3</p>
+                    <a href="https://www.instagram.com/naseem.stann" target="_blank" class="profile-link">View Profile</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>Contact me: zs970120@gmail.com | +92 312 4365720</p>
+            <div class="social-links">
+                <a href="https://www.instagram.com/naseem.stann" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.instagram.com/newslypakistan" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="mailto:zs970120@gmail.com"><i class="far fa-envelope"></i></a>
+                <a href="tel:+923124365720"><i class="fas fa-phone"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Intersection Observer for scroll animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('section').forEach(section => {
+                observer.observe(section);
+            });
+
+            // Smooth scroll for internal links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Add hover effect to tools
+            document.querySelectorAll('.tool').forEach(tool => {
+                tool.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.05)';
+                });
+                tool.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
