@@ -346,6 +346,35 @@
             }
             .tool { padding: 1rem 2rem; }
         }
+
+        @media screen and (max-width: 480px) {
+            .video video {
+                width: 100%;
+                height: auto; /* Maintain aspect ratio */
+            }
+        
+            .gallery {
+                grid-template-columns: 1fr; /* Ensure one column layout */
+                gap: 1rem;
+            }
+        
+            .instagram-profiles {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        
+            h1 {
+                font-size: 2.5rem; /* Reduce title size for better fit */
+            }
+        
+            .subtitle {
+                font-size: 1.2rem;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+
+        
     </style
 </head>
 <body>
